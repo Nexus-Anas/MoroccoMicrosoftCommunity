@@ -16,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\MMC.Core\MMC.Core.csproj" />
     <ProjectReference Include="..\MMC.EF\MMC.EF.csproj" />
   </ItemGroup>
 

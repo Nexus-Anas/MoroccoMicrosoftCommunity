@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC.EF", "MMC.EF\MMC.EF.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC.Core", "MMC.Core\MMC.Core.csproj", "{8BB6ED4F-EBA4-442D-8E8A-B1B161DDF340}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC.WEB", "MMC.WEB\MMC.WEB.csproj", "{AA552DDD-A7C3-4AA9-9998-43E5E0640056}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8BB6ED4F-EBA4-442D-8E8A-B1B161DDF340}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BB6ED4F-EBA4-442D-8E8A-B1B161DDF340}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BB6ED4F-EBA4-442D-8E8A-B1B161DDF340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA552DDD-A7C3-4AA9-9998-43E5E0640056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA552DDD-A7C3-4AA9-9998-43E5E0640056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA552DDD-A7C3-4AA9-9998-43E5E0640056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA552DDD-A7C3-4AA9-9998-43E5E0640056}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

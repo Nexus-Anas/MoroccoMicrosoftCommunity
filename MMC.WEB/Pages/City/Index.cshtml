@@ -1,0 +1,68 @@
+﻿@page
+@model MMC.WEB.Pages.City.IndexModel
+@{
+    ViewData["Title"] = "Courses List";
+}
+
+
+<div class="container-fluid">
+
+    <div class="container-fluid bg-secondary py-1 mb-2">
+        <h3 class="text-center text-light">Cities</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title title-2 text-dark">Cities List</h4>
+            <hr>
+
+            <!-- Add Modal Button -->
+            <div class="d-flex justify-content-center my-3">
+                <div class="col-xl-6 col-lg-8 col-md-6 col-sm-8 col-12">
+                    <button class="btn btn-dark btn-lg" data-toggle="modal" data-target="#addmodal"><i class="fas fa-plus"></i>&nbsp; Add City</button>
+                </div>
+            </div>
+
+            <form method="post">
+
+                <!-- Table -->
+                <div class="d-flex justify-content-center">
+                    <div class="table-responsive col-xl-6 col-lg-8 col-md-6 col-sm-8 col-12">
+                        <table id="zero_config" class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th class="text-white bg-dark">
+                                        <span class="h5">Name</span>
+                                    </th>
+                                    <th class="text-white bg-dark d-flex justify-content-end">
+                                        <span class="h5">Action</span>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    <tr>
+                                        <td class="text-dark text-capitalize"><span class="h5">@item.Name</span></td>
+                                        <td class="text-dark d-flex justify-content-end">
+                                            <a asp-route-id="@item.Id" asp-page="/City/Details" class="text text-white btn btn-secondary mr-1" data-toggle="tooltip" data-placement="left" title="Check"><i class="bi bi-info-circle-fill"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
