@@ -3,9 +3,9 @@ namespace MMC.Core.Services;
 
 public interface IEventService
 {
-    Task<Event> GetEvent(int id);
-    Task<IEnumerable<Event>> GetAllEvents();
-    Task<Event> CreateEvent(Event entity);
-    Task<Event> UpdateEvent(int id, Event entity);
-    Task DeleteEvent(int id);
+    Task<Event> Find(int id);
+    Task<IEnumerable<Event>> FindAll();
+    Task<Event> Create(Event entity);
+    Task<Event> Update(int id, Event entity);
+    Task Delete(int id);
 }

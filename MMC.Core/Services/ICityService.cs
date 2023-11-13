@@ -4,9 +4,9 @@ namespace MMC.Core.Services;
 
 public interface ICityService
 {
-    Task<City> GetCity(int id);
-    Task<IEnumerable<City>> GetAllCities();
-    Task<City> CreateCity(City entity);
-    Task<City> UpdateCity(int id, City entity);
-    Task DeleteCity(int id);
+    Task<City> Find(int id);
+    Task<IEnumerable<City>> FindAll();
+    Task<City> Create(City entity);
+    Task<City> Update(int id, City entity);
+    Task Delete(int id);
 }
