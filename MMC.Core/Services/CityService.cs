@@ -1,6 +1,5 @@
 ﻿using MMC.Core.Interfaces;
 using MMC.Core.Models;
-using System.Threading.Tasks;
 
 namespace MMC.Core.Services;
 
@@ -12,14 +11,14 @@ public class CityService : ICityService
 
 
 
-    public async Task<City> GetCity(int id)
+    public async Task<City> Find(int id)
         => await _repo.Get(id);
-    public async Task<IEnumerable<City>> GetAllCities()
+    public async Task<IEnumerable<City>> FindAll()
         => await _repo.GetAll();
-    public async Task<City> CreateCity(City entity)
-        => await _repo.Add(entity);
-    public async Task<City> UpdateCity(int id, City entity)
-        => await _repo.Update(id, entity);
-    public async Task DeleteCity(int id)
-        => await _repo.Delete(id);
+    public async Task<City> Create(City entity)
+        => await _repo.Post(entity);
+    public async Task<City> Update(int id, City entity)
+        => await _repo.Put(id, entity);
+    public async Task Delete(int id)
+        => await _repo.Remove(id);
 }

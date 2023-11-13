@@ -1,11 +1,5 @@
 ﻿using MMC.Core.Interfaces;
 using MMC.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MMC.Core.Services;
 
@@ -17,14 +11,14 @@ public class EventService : IEventService
 
 
 
-    public async Task<Event> GetEvent(int id)
+    public async Task<Event> Find(int id)
         => await _repo.Get(id);
-    public async Task<IEnumerable<Event>> GetAllEvents()
+    public async Task<IEnumerable<Event>> FindAll()
         => await _repo.GetAll();
-    public async Task<Event> CreateEvent(Event entity)
-        => await _repo.Add(entity);
-    public async Task<Event> UpdateEvent(int id, Event entity)
-        => await _repo.Update(id, entity);
-    public async Task DeleteEvent(int id)
-        => await _repo.Delete(id);
+    public async Task<Event> Create(Event entity)
+        => await _repo.Post(entity);
+    public async Task<Event> Update(int id, Event entity)
+        => await _repo.Put(id, entity);
+    public async Task Delete(int id)
+        => await _repo.Remove(id);
 }

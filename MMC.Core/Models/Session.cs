@@ -2,7 +2,7 @@
 
 namespace MMC.Core.Models;
 
-public class Sessions
+public class Session
 {
     public int Id { get; set; }
     public required string Name { get; set; }

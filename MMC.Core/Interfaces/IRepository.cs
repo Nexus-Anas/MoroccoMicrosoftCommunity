@@ -11,7 +11,7 @@ public interface IRepository<T> where T : class
 {
     Task<T> Get(int id);
     Task<IEnumerable<T>> GetAll();
-    Task<T> Add(T entity);
-    Task<T> Update(int id, T entity);
-    Task Delete(int id);
+    Task<T> Post(T entity);
+    Task<T> Put(int id, T entity);
+    Task Remove(int id);
 }

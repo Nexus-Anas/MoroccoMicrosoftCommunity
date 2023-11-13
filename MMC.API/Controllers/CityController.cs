@@ -15,11 +15,11 @@ public class CityController : ControllerBase
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<City>> GetCity(int id)
+    public async Task<ActionResult<City>> Find(int id)
     {
         try
         {
-            var city = await _service.GetCity(id);
+            var city = await _service.Find(id);
             return city is not null ? city : NotFound();
         }
         catch (Exception) { return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the db"); }
@@ -27,23 +27,23 @@ public class CityController : ControllerBase
 
 
     [HttpGet]
-    public async Task<ActionResult> GetAllCities()
+    public async Task<ActionResult> FindAll()
     {
-        try { return Ok(await _service.GetAllCities()); }
+        try { return Ok(await _service.FindAll()); }
         catch (Exception) { return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the db"); }
     }
 
 
     [HttpPost]
-    public async Task<ActionResult<City>> CreateCity([FromBody] City c)
+    public async Task<ActionResult<City>> Create([FromBody] City c)
     {
         try
         {
             if (c == null)
                 return BadRequest();
 
-            var city = await _service.CreateCity(c);
-            return CreatedAtAction(nameof(CreateCity), new { id = city.Id }, city);
+            var city = await _service.Create(c);
+            return CreatedAtAction(nameof(Create), new { id = city.Id }, city);
 
         }
         catch (Exception) { return StatusCode(StatusCodes.Status500InternalServerError, "Error creating new city"); }
@@ -51,14 +51,14 @@ public class CityController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<City>> UpdateCity(int id, [FromBody] City c)
+    public async Task<ActionResult<City>> Update(int id, [FromBody] City c)
     {
         try
         {
             if (id != c.Id)
                 return BadRequest("City ID mismatch");
 
-            var city = await _service.UpdateCity(id, c);
+            var city = await _service.Update(id, c);
 
             if (city is null)
                 return NotFound($"City with id {id} not found");
@@ -70,16 +70,16 @@ public class CityController : ControllerBase
 
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteEvent(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         try
         {
-            var city = await _service.GetCity(id);
+            var city = await _service.Find(id);
 
             if (city is null)
                 return NotFound($"City with id {id} not found");
 
-            await _service.DeleteCity(id);
+            await _service.Delete(id);
             return Ok($"City with id {id} deleted");
         }
         catch (Exception) { return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting city record"); }

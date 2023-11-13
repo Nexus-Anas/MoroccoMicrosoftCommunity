@@ -27,5 +27,5 @@ public class SpeakerInfo
     public string? Linkedin { get; set; }
     public string? Website { get; set; }
     [JsonIgnore]
-    public List<Sessions>? Sessions { get; set; }
+    public List<Session>? Sessions { get; set; }
 }
