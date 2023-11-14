@@ -2,7 +2,7 @@
 
 namespace MMC.Core.Services;
 
-internal interface ISessionService
+public interface ISessionService
 {
     Task<Session> Find(int id);
     Task<IEnumerable<Session>> FindAll();

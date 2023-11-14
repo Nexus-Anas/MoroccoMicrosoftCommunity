@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MMC.Core.Services;
 
-internal class SessionService : ISessionService
+public class SessionService : ISessionService
 {
     private readonly IRepository<Session> _repo;
     public SessionService(IRepository<Session> repo) => _repo = repo;

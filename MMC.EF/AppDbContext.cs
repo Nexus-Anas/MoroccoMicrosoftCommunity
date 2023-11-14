@@ -18,7 +18,7 @@ public class AppDbContext : DbContext
 
 
 
-    public DbSet<Categorie> Categorias { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<Event> Events { get; set; }
     public DbSet<Participant> Participants { get; set; }

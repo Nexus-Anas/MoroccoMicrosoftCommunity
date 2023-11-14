@@ -13,8 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Con"), b => b.MigrationsAssembly("MMC.API")));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<IEventService,EventService>();
 builder.Services.AddScoped<ICityService,CityService>();
+builder.Services.AddScoped<ICategoryService,CategoryService>();
+builder.Services.AddScoped<IEventService,EventService>();
+builder.Services.AddScoped<IParticipantService,ParticipantService>();
+builder.Services.AddScoped<ISessionService,SessionService>();
+builder.Services.AddScoped<ISpeakerInfoService,SpeakerInfoService>();
+builder.Services.AddScoped<ISponsorService,SponsorService>();
+builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

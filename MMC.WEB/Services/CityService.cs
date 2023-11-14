@@ -6,6 +6,7 @@ public class CityService
 {
     private readonly HttpClient _http;
     private readonly string _baseUrl;
+    private string _controller = "City";
 
     public CityService(HttpClient http, IConfiguration configuration)
     {
@@ -13,35 +14,35 @@ public class CityService
         _baseUrl = configuration.GetValue<string>("ApiSettings:BaseUrl");
     }
 
-    public async Task<City> GetCity(int id)
+    public async Task<City> Find(int id)
     {
-        var response = await _http.GetFromJsonAsync<City>($"{_baseUrl}api/City/{id}");
+        var response = await _http.GetFromJsonAsync<City>($"{_baseUrl}api/{_controller}/{id}");
         return response;
     }
 
-    public async Task<IEnumerable<City>> GetAllCities()
+    public async Task<IEnumerable<City>> FindAll()
     {
-        var response = await _http.GetFromJsonAsync<IEnumerable<City>>($"{_baseUrl}api/City");
+        var response = await _http.GetFromJsonAsync<IEnumerable<City>>($"{_baseUrl}api/{_controller}");
         return response;
     }
 
-    public async Task<City> CreateCity(City city)
+    public async Task<City> Create(City city)
     {
-        var response = await _http.PostAsJsonAsync($"{_baseUrl}api/City", city);
+        var response = await _http.PostAsJsonAsync($"{_baseUrl}api/{_controller}", city);
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<City>();
     }
 
-    public async Task<City> UpdateCity(int id, City city)
+    public async Task<City> Update(int id, City city)
     {
-        var response = await _http.PutAsJsonAsync($"{_baseUrl}api/City/{id}", city);
+        var response = await _http.PutAsJsonAsync($"{_baseUrl}api/{_controller}/{id}", city);
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<City>();
     }
 
-    public async Task DeleteCity(int id)
+    public async Task Delete(int id)
     {
-        var response = await _http.DeleteAsync($"{_baseUrl}api/City/{id}");
+        var response = await _http.DeleteAsync($"{_baseUrl}api/{_controller}/{id}");
         response.EnsureSuccessStatusCode();
     }
 }

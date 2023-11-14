@@ -6,6 +6,7 @@ public class EventService
 {
     private readonly HttpClient _http;
     private readonly string _baseUrl;
+    private string _controller = "Event";
 
     public EventService(HttpClient http, IConfiguration configuration)
     {
@@ -13,35 +14,35 @@ public class EventService
         _baseUrl = configuration.GetValue<string>("ApiSettings:BaseUrl");
     }
 
-    public async Task<Event> GetEvent(int id)
+    public async Task<Event> Find(int id)
     {
-        var response = await _http.GetFromJsonAsync<Event>($"{_baseUrl}api/Event/{id}");
+        var response = await _http.GetFromJsonAsync<Event>($"{_baseUrl}api/{_controller}/{id}");
         return response;
     }
 
-    public async Task<IEnumerable<Event>> GetAllEvents()
+    public async Task<IEnumerable<Event>> FindAll()
     {
-        var response = await _http.GetFromJsonAsync<IEnumerable<Event>>($"{_baseUrl}api/Event");
+        var response = await _http.GetFromJsonAsync<IEnumerable<Event>>($"{_baseUrl}api/{_controller}");
         return response;
     }
 
-    public async Task<Event> CreateEvent(Event @event)
+    public async Task<Event> Create(Event @event)
     {
-        var response = await _http.PostAsJsonAsync($"{_baseUrl}api/Event", @event);
+        var response = await _http.PostAsJsonAsync($"{_baseUrl}api/{_controller}", @event);
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<Event>();
     }
 
-    public async Task<Event> UpdateEvent(int id, Event @event)
+    public async Task<Event> Update(int id, Event @event)
     {
-        var response = await _http.PutAsJsonAsync($"{_baseUrl}api/Event/{id}", @event);
+        var response = await _http.PutAsJsonAsync($"{_baseUrl}api/{_controller} /{id}", @event);
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<Event>();
     }
 
-    public async Task DeleteEvent(int id)
+    public async Task Delete(int id)
     {
-        var response = await _http.DeleteAsync($"{_baseUrl}api/Event/{id}");
+        var response = await _http.DeleteAsync($"{_baseUrl}api/{_controller}/{id}");
         response.EnsureSuccessStatusCode();
     }
 }

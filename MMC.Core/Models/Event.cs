@@ -17,7 +17,7 @@ public class Event
     public string? Address { get; set; }
     public int CategorieId { get; set; }
     [JsonIgnore]
-    public Categorie? Categorie { get; set; }
+    public Category? Categorie { get; set; }
     public int NbPlace { get; set; }
     [JsonIgnore]
     public List<SpeakerInfo>? SpeakerInfos { get; set; }

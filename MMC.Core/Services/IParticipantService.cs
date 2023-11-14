@@ -2,7 +2,7 @@
 
 namespace MMC.Core.Services;
 
-internal interface IParticipantService
+public interface IParticipantService
 {
     Task<Participant> Find(int id);
     Task<IEnumerable<Participant>> FindAll();
