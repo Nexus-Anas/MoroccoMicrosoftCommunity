@@ -14,30 +14,30 @@ public class SpeakerInfoService
         _baseUrl = configuration.GetValue<string>("ApiSettings:BaseUrl");
     }
 
-    public async Task<SpeakerInfo> Find(int id)
+    public async Task<Speaker> Find(int id)
     {
-        var response = await _http.GetFromJsonAsync<SpeakerInfo>($"{_baseUrl}api/{_controller}/{id}");
+        var response = await _http.GetFromJsonAsync<Speaker>($"{_baseUrl}api/{_controller}/{id}");
         return response;
     }
 
-    public async Task<IEnumerable<SpeakerInfo>> FindAll()
+    public async Task<IEnumerable<Speaker>> FindAll()
     {
-        var response = await _http.GetFromJsonAsync<IEnumerable<SpeakerInfo>>($"{_baseUrl}api/{_controller}");
+        var response = await _http.GetFromJsonAsync<IEnumerable<Speaker>>($"{_baseUrl}api/{_controller}");
         return response;
     }
 
-    public async Task<SpeakerInfo> Create(SpeakerInfo speaker)
+    public async Task<Speaker> Create(Speaker speaker)
     {
         var response = await _http.PostAsJsonAsync($"{_baseUrl}api/{_controller}", speaker);
         response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<SpeakerInfo>();
+        return await response.Content.ReadFromJsonAsync<Speaker>();
     }
 
-    public async Task<SpeakerInfo> Update(int id, SpeakerInfo speaker)
+    public async Task<Speaker> Update(int id, Speaker speaker)
     {
         var response = await _http.PutAsJsonAsync($"{_baseUrl}api/{_controller}/{id}", speaker);
         response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<SpeakerInfo>();
+        return await response.Content.ReadFromJsonAsync<Speaker>();
     }
 
     public async Task Delete(int id)

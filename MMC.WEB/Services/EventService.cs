@@ -45,4 +45,16 @@ public class EventService
         var response = await _http.DeleteAsync($"{_baseUrl}api/{_controller}/{id}");
         response.EnsureSuccessStatusCode();
     }
+
+    public async Task<IEnumerable<City>> FindAllCities()
+    {
+        var response = await _http.GetFromJsonAsync<IEnumerable<City>>($"{_baseUrl}api/City");
+        return response;
+    }
+
+    public async Task<IEnumerable<Category>> FindAllCategories()
+    {
+        var response = await _http.GetFromJsonAsync<IEnumerable<Category>>($"{_baseUrl}api/Category");
+        return response;
+    }
 }

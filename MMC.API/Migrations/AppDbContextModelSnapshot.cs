@@ -22,7 +22,22 @@ namespace MMC.API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EventSpeakerInfo", b =>
+            modelBuilder.Entity("EventParticipant", b =>
+                {
+                    b.Property<int>("EventsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParticipantsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventsId", "ParticipantsId");
+
+                    b.HasIndex("ParticipantsId");
+
+                    b.ToTable("EventParticipant");
+                });
+
+            modelBuilder.Entity("EventSpeaker", b =>
                 {
                     b.Property<int>("EventsId")
                         .HasColumnType("int");
@@ -34,7 +49,7 @@ namespace MMC.API.Migrations
 
                     b.HasIndex("SpeakerInfosId");
 
-                    b.ToTable("EventSpeakerInfo");
+                    b.ToTable("EventSpeaker");
                 });
 
             modelBuilder.Entity("EventSponsor", b =>
@@ -214,19 +229,19 @@ namespace MMC.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SpeakerInfoId")
+                    b.Property<int?>("SpeakerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("SpeakerInfoId");
+                    b.HasIndex("SpeakerId");
 
                     b.ToTable("Sessions");
                 });
 
-            modelBuilder.Entity("MMC.Core.Models.SpeakerInfo", b =>
+            modelBuilder.Entity("MMC.Core.Models.Speaker", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,7 +256,15 @@ namespace MMC.API.Migrations
                     b.Property<string>("Facebook")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Instagram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Linkedin")
@@ -253,7 +276,15 @@ namespace MMC.API.Migrations
                     b.Property<bool>("MVP")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -268,15 +299,10 @@ namespace MMC.API.Migrations
                     b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Website")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("SpeakerInfos");
                 });
@@ -334,7 +360,7 @@ namespace MMC.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EventSpeakerInfo", b =>
+            modelBuilder.Entity("EventParticipant", b =>
                 {
                     b.HasOne("MMC.Core.Models.Event", null)
                         .WithMany()
@@ -342,7 +368,22 @@ namespace MMC.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MMC.Core.Models.SpeakerInfo", null)
+                    b.HasOne("MMC.Core.Models.Participant", null)
+                        .WithMany()
+                        .HasForeignKey("ParticipantsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EventSpeaker", b =>
+                {
+                    b.HasOne("MMC.Core.Models.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MMC.Core.Models.Speaker", null)
                         .WithMany()
                         .HasForeignKey("SpeakerInfosId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -386,27 +427,16 @@ namespace MMC.API.Migrations
             modelBuilder.Entity("MMC.Core.Models.Session", b =>
                 {
                     b.HasOne("MMC.Core.Models.Event", "Event")
-                        .WithMany()
+                        .WithMany("Sessions")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MMC.Core.Models.SpeakerInfo", null)
+                    b.HasOne("MMC.Core.Models.Speaker", null)
                         .WithMany("Sessions")
-                        .HasForeignKey("SpeakerInfoId");
+                        .HasForeignKey("SpeakerId");
 
                     b.Navigation("Event");
-                });
-
-            modelBuilder.Entity("MMC.Core.Models.SpeakerInfo", b =>
-                {
-                    b.HasOne("MMC.Core.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MMC.Core.Models.Category", b =>
@@ -419,7 +449,12 @@ namespace MMC.API.Migrations
                     b.Navigation("Events");
                 });
 
-            modelBuilder.Entity("MMC.Core.Models.SpeakerInfo", b =>
+            modelBuilder.Entity("MMC.Core.Models.Event", b =>
+                {
+                    b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("MMC.Core.Models.Speaker", b =>
                 {
                     b.Navigation("Sessions");
                 });

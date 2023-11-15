@@ -10,4 +10,6 @@ public class Participant
     public string? Company { get; set; }
     public char Gender { get; set; }
     public required string Message { get; set; }
+
+    public List<Event> Events { get; set; }
 }

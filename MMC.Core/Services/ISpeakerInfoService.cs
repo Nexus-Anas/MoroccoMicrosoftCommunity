@@ -4,9 +4,9 @@ namespace MMC.Core.Services;
 
 public interface ISpeakerInfoService
 {
-    Task<SpeakerInfo> Find(int id);
-    Task<IEnumerable<SpeakerInfo>> FindAll();
-    Task<SpeakerInfo> Create(SpeakerInfo entity);
-    Task<SpeakerInfo> Update(int id, SpeakerInfo entity);
+    Task<Speaker> Find(int id);
+    Task<IEnumerable<Speaker>> FindAll();
+    Task<Speaker> Create(Speaker entity);
+    Task<Speaker> Update(int id, Speaker entity);
     Task Delete(int id);
 }

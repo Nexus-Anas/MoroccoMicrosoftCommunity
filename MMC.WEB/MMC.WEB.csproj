@@ -19,4 +19,9 @@
     <ProjectReference Include="..\MMC.Core\MMC.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>

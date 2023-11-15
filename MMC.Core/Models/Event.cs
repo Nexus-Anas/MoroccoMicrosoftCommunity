@@ -20,12 +20,16 @@ public class Event
     public Category? Categorie { get; set; }
     public int NbPlace { get; set; }
     [JsonIgnore]
-    public List<SpeakerInfo>? SpeakerInfos { get; set; }
+    public List<Speaker>? SpeakerInfos { get; set; }
     [JsonIgnore]
     public List<Sponsor>? Sponsors { get; set; }
+    [JsonIgnore]
+    public List<Session>? Sessions { get; set; }
     public string? Facebook { get; set; }
     public string? Instagram { get; set; }
     public string? Twitter { get; set; }
     public string? Linkedin { get; set; }
     public string? Website { get; set; }
+    [JsonIgnore]
+    public List<Participant>? Participants { get; set; }
 }

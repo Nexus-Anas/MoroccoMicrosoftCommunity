@@ -16,7 +16,7 @@ public class SpeakerInfoController : ControllerBase
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<SpeakerInfo>> Find(int id)
+    public async Task<ActionResult<Speaker>> Find(int id)
     {
         try
         {
@@ -36,7 +36,7 @@ public class SpeakerInfoController : ControllerBase
 
 
     [HttpPost]
-    public async Task<ActionResult<SpeakerInfo>> Create([FromBody] SpeakerInfo s)
+    public async Task<ActionResult<Speaker>> Create([FromBody] Speaker s)
     {
         try
         {
@@ -52,7 +52,7 @@ public class SpeakerInfoController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<SpeakerInfo>> Update(int id, [FromBody] SpeakerInfo s)
+    public async Task<ActionResult<Speaker>> Update(int id, [FromBody] Speaker s)
     {
         try
         {

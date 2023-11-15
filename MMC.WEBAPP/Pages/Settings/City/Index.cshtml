@@ -1,0 +1,92 @@
+﻿@page
+@model MMC.WEBAPP.Pages.City.IndexModel
+@{
+    ViewData["Title"] = "Settings";
+}
+
+
+<div class="container-fluid">
+
+    <div class="container-fluid bg-dark py-1 mb-2">
+        <h3 class="text-center text-light">Settings</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title title-2 text-dark">Cities List</h4>
+            <hr>
+            @if (!ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <p><span asp-validation-for="City.Name"></span></p>
+                </div>
+            }
+            <!-- Add Modal Button -->
+            <div class="d-flex justify-content-center my-3">
+                <div class="col-xl-5 col-lg-8 col-md-6 col-sm-8 col-12">
+                    <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#addmodal"><i class="fas fa-plus"></i>&nbsp; Add City</button>
+                </div>
+            </div>
+
+            <form method="post">
+
+                <!-- Table -->
+                <div class="d-flex justify-content-center">
+                    <div class="table-responsive col-xl-5 col-lg-8 col-md-6 col-sm-8 col-12">
+                        <table id="zero_config" class="table table-borderless table-striped table-earning">
+                            <thead>
+                                <tr>
+                                    <th class="text-white bg-info">
+                                        <span class="h5">Name</span>
+                                    </th>
+                                    <th class="text-white bg-info d-flex justify-content-end">
+                                        <span class="h5">Action</span>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    <tr>
+                                        <td class="text-dark text-capitalize"><span class="h5">@item.Name</span></td>
+                                        <td class="text-dark d-flex justify-content-end">
+                                            <a asp-route-id="@item.Id" asp-page="/Settings/City/Details" class="text text-white btn btn-info mr-1" data-toggle="tooltip" data-placement="left" title="Manage"><i class="bi bi-info-circle-fill"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Add Modal -->
+                <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" style="font-size:20px">New City</h5>
+                                <button type="button" class="close mb-1" data-dismiss="modal" aria-label="Close"><i class="bi bi-x-circle"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <input asp-for="City.Name" type="text" class="form-control h4" placeholder="enter new city">
+                            </div>
+                            <div class="modal-footer">
+                                <button asp-page-handler="Create" class="btn btn-primary">Confirm</button>
+                                <button data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

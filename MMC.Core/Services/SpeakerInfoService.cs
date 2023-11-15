@@ -10,19 +10,19 @@ namespace MMC.Core.Services;
 
 public class SpeakerInfoService : ISpeakerInfoService
 {
-    private readonly IRepository<SpeakerInfo> _repo;
-    public SpeakerInfoService(IRepository<SpeakerInfo> repo) => _repo = repo;
+    private readonly IRepository<Speaker> _repo;
+    public SpeakerInfoService(IRepository<Speaker> repo) => _repo = repo;
 
 
 
 
-    public async Task<SpeakerInfo> Find(int id)
+    public async Task<Speaker> Find(int id)
         => await _repo.Get(id);
-    public async Task<IEnumerable<SpeakerInfo>> FindAll()
+    public async Task<IEnumerable<Speaker>> FindAll()
         => await _repo.GetAll();
-    public async Task<SpeakerInfo> Create(SpeakerInfo entity)
+    public async Task<Speaker> Create(Speaker entity)
         => await _repo.Post(entity);
-    public async Task<SpeakerInfo> Update(int id, SpeakerInfo entity)
+    public async Task<Speaker> Update(int id, Speaker entity)
         => await _repo.Put(id, entity);
     public async Task Delete(int id)
         => await _repo.Remove(id);

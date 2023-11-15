@@ -23,7 +23,7 @@ public class AppDbContext : DbContext
     public DbSet<Event> Events { get; set; }
     public DbSet<Participant> Participants { get; set; }
     public DbSet<Session> Sessions { get; set; }
-    public DbSet<SpeakerInfo> SpeakerInfos { get; set;}
+    public DbSet<Speaker> SpeakerInfos { get; set;}
     public DbSet<Sponsor> Sponsors { get; set; }
     public DbSet<User> Users { get; set; }
 }

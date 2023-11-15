@@ -18,7 +18,7 @@ builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IEventService,EventService>();
 builder.Services.AddScoped<IParticipantService,ParticipantService>();
 builder.Services.AddScoped<ISessionService,SessionService>();
-builder.Services.AddScoped<ISpeakerInfoService,SpeakerInfoService>();
+builder.Services.AddScoped<ISpeakerService,SpeakerService>();
 builder.Services.AddScoped<ISponsorService,SponsorService>();
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddSwaggerGen();

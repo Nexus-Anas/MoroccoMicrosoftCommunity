@@ -1,0 +1,198 @@
+﻿@page
+@model MMC.WEBAPP.Pages.Event.CreateModel
+@{
+    ViewData["Title"] = "New Event";
+}
+
+
+<div class="container-fluid">
+    <div class="container-fluid py-1 mb-2 bg-dark">
+        <h3 class="mb-0 text-center text-light">Events</h3>
+    </div>
+
+    <div class="card">
+        <div class="card-body wizard-content">
+            <h4 class="card-title title-2">Event Form</h4>
+            <hr>
+            @if (!ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <p><span asp-validation-for="Event.Name"></span></p>
+                </div>
+            }
+            <div class="mt-4">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-xl-8 col-lg-10 col-12">
+                            <div class="card" style="background-color:#F2F2F2">
+                                <div class="card-header font-weight-bold">Event</div>
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <h3 class="text-center title-1 font-weight-bold">New Event</h3>
+                                    </div>
+                                    <hr>
+                                    <form method="post" enctype="multipart/form-data">
+
+                                        <div class="form-row">
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.Name" class="control-label">Event Name <span class="text-danger">*</span></label>
+                                                <span asp-validation-for="Event.Name" class="text text-danger"></span>
+                                                <input asp-for="Event.Name" type="text" class="form-control required" placeholder="type event name">
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.NbPlace" class="control-label">Number of places <span class="text-danger">*</span></label>
+                                                <span asp-validation-for="Event.NbPlace" class="text text-danger"></span>
+                                                <input asp-for="Event.NbPlace" type="text" class="form-control required" value="50">
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.CategorieId" class="control-label">Category <span class="text-danger">*</span></label>
+                                                <span asp-validation-for="Event.CategorieId" class="text text-danger"></span>
+                                                <select asp-for="Event.CategorieId" class="form-control form-select required">
+                                                    <option value="">Select...</option>
+                                                    @foreach (var item in Model.Categories)
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.CityId" class="control-label">City <span class="text-danger">*</span></label>
+                                                <span asp-validation-for="Event.CityId" class="text text-danger"></span>
+                                                <select asp-for="Event.CityId" class="form-control form-select required">
+                                                    <option value="">Select...</option>
+                                                    @foreach (var item in Model.Cities)
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.Du" class="control-label">Start Date <span class="text-danger">*</span></label>
+                                                <span asp-validation-for="Event.Du" class="text text-danger"></span>
+                                                <input asp-for="Event.Du" type="date" class="form-control required" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.Au" class="control-label">End Date <span class="text-danger">*</span></label>
+                                                <span asp-validation-for="Event.Au" class="text text-danger"></span>
+                                                <input asp-for="Event.Au" type="date" class="form-control required" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.Type" class="control-label">Event Type <span class="text-danger">*</span></label>
+                                                <span asp-validation-for="Event.Type" class="text text-danger"></span>
+                                                <input asp-for="Event.Type" type="text" class="form-control required" placeholder="enter event type">
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label class="control-label">Image</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputFileAdd">URL</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputFile" name="files" multiple>
+                                                        <label class="custom-file-label" for="inputFile">Select images...</label>
+                                                    </div>
+                                                </div>
+                                                <div id="selectedFiles" class="mt-2"></div> <!-- Container to display selected files -->
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.Description">Description</label>
+                                                <textarea asp-for="Event.Description" class="form-control" rows="4" aria-required="true"></textarea>
+                                            </div>
+
+                                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <label asp-for="Event.Address">Address</label>
+                                                <textarea asp-for="Event.Address" class="form-control" rows="4" aria-required="true"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-body wizard-content">
+                                                <h4 class="card-title title-2">Optional</h4>
+                                                <hr>
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                                                        <label asp-for="Event.Facebook" class="text text-dark">Facebook</label>
+                                                        <input asp-for="Event.Facebook" type="text" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                                                        <label asp-for="Event.Twitter" class="text text-dark">Twitter</label>
+                                                        <input asp-for="Event.Twitter" type="text" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                                                        <label asp-for="Event.Linkedin" class="text text-dark">Linkedim</label>
+                                                        <input asp-for="Event.Linkedin" type="text" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                                                        <label asp-for="Event.Instagram" class="text text-dark">Instagram</label>
+                                                        <input asp-for="Event.Instagram" type="text" class="form-control">
+                                                    </div>
+
+                                                    <div class="form-group col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                                                        <label asp-for="Event.Website" class="text text-dark">Website</label>
+                                                        <input asp-for="Event.Website" type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div>
+                                            <button asp-page-handler="Create" class="btn btn-lg btn-info btn-block mt-4">Valider</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+@section DocUploadJS {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#inputFile').on("change", function () {
+                var inputFiles = $(this).prop("files");
+                var selectedFilesContainer = $('#selectedFiles');
+
+                // Clear previous content
+                selectedFilesContainer.empty();
+
+                // Update input label
+                if (inputFiles.length === 0) {
+                    $(this).next(".custom-file-label").html("Choisir un fichier...");
+                } else {
+                    $(this).next(".custom-file-label").html(inputFiles.length);
+                }
+
+                // Display selected files in rows
+                for (var i = 0; i < inputFiles.length; i++) {
+                    selectedFilesContainer.append('<div>' + inputFiles[i].name + '</div>');
+                }
+            });
+        });
+    </script>
+}
