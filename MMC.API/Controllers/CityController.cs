@@ -33,6 +33,22 @@ public class CityController : ControllerBase
         catch (Exception) { return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the db"); }
     }
 
+    [HttpGet("Default/")]
+    public async Task<ActionResult> FindAllDefault()
+    {
+        try
+        {
+            var cities = new List<City>()
+            {
+                new City{Id = 1, Name = "Rabat"},
+                new City{Id = 2, Name = "Sale"},
+                new City{Id = 3, Name = "Casa"}
+            };
+            return Ok(cities);
+        }
+        catch (Exception) { return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the db"); }
+    }
+
 
     [HttpPost]
     public async Task<ActionResult<City>> Create([FromBody] City c)

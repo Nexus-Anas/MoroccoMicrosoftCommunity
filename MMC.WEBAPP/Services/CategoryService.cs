@@ -8,6 +8,7 @@ public class CategoryService
     private readonly string _baseUrl;
     private string _controller = "Category";
 
+    
     public CategoryService(HttpClient http, IConfiguration configuration)
     {
         _http = http;

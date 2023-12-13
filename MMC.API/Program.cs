@@ -6,6 +6,7 @@ using MMC.EF.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddApplicationInsightsTelemetry();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -22,6 +23,7 @@ builder.Services.AddScoped<ISpeakerService,SpeakerService>();
 builder.Services.AddScoped<ISponsorService,SponsorService>();
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 
@@ -31,6 +33,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
